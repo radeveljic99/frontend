@@ -16,7 +16,7 @@ function App() {
                     <Route  exact path='/' component={Pocetna}/>
                     <Route  path='/login' component={Login}/>
                     <Route  path='/register' component={Register}/>
-                    <Route  path='/productDetails/1' component={ProizvodDetalji}/>
+                    <Route  path='/productDetails/:id' component={ProizvodDetalji}/>
                     <Route  path='/cart' component={Korpa}/>
                 <Footer/>
             </Router>

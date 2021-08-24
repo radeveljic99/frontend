@@ -7,7 +7,7 @@ class ProizvodDetalji extends React.Component {
             <h1 className="text-3xl text-red-600 text-center m-5 p-5"> Detalji o proizvodu </h1>
             <div className="flex justify-around items-baseline m-5 pb-5">
                 <div className="grid grid-cols-2 grid-flow-row rounded-xl border border-red-400  shadow-xl">
-                    <div className="p-3 "><img src="img/zs1.png" alt="Zemlja Snova" className="rounded-xl "/></div>
+                    <div className="p-3 "><img src="/img/zs1.png" alt="Zemlja Snova" className="rounded-xl "/></div>
                     <div className="m-5 p-5 text-center">
                         <div className="m-5 p-5"><h1 className="text-red-600 text-2xl mb-5 pb-5"> Haljina Zuta </h1>
                             <div className="flex justify-around items-center ">
