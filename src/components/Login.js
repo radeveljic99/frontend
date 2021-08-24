@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 class Login extends React.Component {
 
@@ -28,7 +29,7 @@ class Login extends React.Component {
                     <hr className="border mt-5 mb-3"/>
                         <div className="flex flex-row">
                             <div>
-                                <a href="./register.html" className="text-sm text-blue-600">Registruj se </a>
+                                <Link to='/register' className="text-sm text-blue-600">Registruj se </Link>
                             </div>
                         </div>
             </form>

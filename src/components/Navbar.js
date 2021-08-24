@@ -9,7 +9,7 @@ class Navbar extends React.Component {
                 <nav
                     className="flex justify-around bg-gray-200 items-center space-y-1 border-b-2 b border-red-400 rounded-sm shadow-lg">
                     <div className="flex justify-center items-center pl-2">
-                        <div className="font-semibold text-2xl text-red-600"><a href="#">Zemlja Snova</a></div>
+                        <div className="font-semibold text-2xl text-red-600"><Link to='/'>Zemlja Snova</Link></div>
                     </div>
                     <div className="flex justify-center items-center space-x-1">
                         <input type="text" placeholder="Search for anything"
@@ -41,11 +41,11 @@ class Navbar extends React.Component {
 
                         <div className="border-2 border-red-400 mb-1 p-2 rounded-2xl text-red-600 font-semibold  hover:bg-red-400
             hover:text-white">
-                            <a href="#">Prijava</a>
+                            <Link to='/login'>Prijava</Link>
                         </div>
                         <div className="border-2 border-red-400  mb-1 p-2 rounded-2xl text-red-600 font-semibold  hover:bg-red-400
             hover:text-white ">
-                            <a href="./register.html">Registruj se </a>
+                            <Link to='/register'>Registruj se </Link>
                         </div>
                     </div>
                 </nav>

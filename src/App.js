@@ -11,17 +11,16 @@ import Korpa from "./components/Korpa";
 function App() {
     return (
         <div>
-            <Navbar/>
             <Router>
-                <Switch>
-                    <Route exact path='/' component={Pocetna}/>
-                    <Route path='/login' component={Login}/>
-                    <Route path='/register' component={Register}/>
-                    <Route path='/productDetail' component={ProizvodDetalji}/>
-                    <Route path='/cart' component={Korpa}/>
-                </Switch>
+                <Navbar/>
+                    <Route  exact path='/' component={Pocetna}/>
+                    <Route  path='/login' component={Login}/>
+                    <Route  path='/register' component={Register}/>
+                    <Route  path='/productDetails/1' component={ProizvodDetalji}/>
+                    <Route  path='/cart' component={Korpa}/>
+                <Footer/>
             </Router>
-            <Footer/>
+
         </div>
     );
 }

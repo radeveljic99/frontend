@@ -42,7 +42,7 @@ class Korpa extends React.Component {
 
             <div className="flex justify-around items-center">
                 <div className="grid grid-cols-3 border-2 border-gray-300 rounded-lg  m-5  shadow-xl "
-                     style="width:70vw">
+                     style={{ width : '70vw' }}>
                     <div className="col-span-1 w-64 flex items-center justify-around ml-5 p-2">
                         <img src="./img/zs1.png" alt="Zemlja Snova" className="rounded-md h-72 mr-3"/>
                     </div>
@@ -85,6 +85,6 @@ class Korpa extends React.Component {
             </div>
         </div>
     }
-    }
+}
 
-    export default Korpa;
+export default Korpa;
