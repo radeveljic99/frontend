@@ -7,7 +7,7 @@ class Footer extends React.Component {
         return <div>
             <hr className="border border-gray-300 mb-2"/>
             <footer className="text-center text-md m-5 text-gray-900">
-                @ 2021 Sva prava zadržana <span className="font-bold"> Zemlja Snova</span>
+                @2021 Sva prava zadržana <span className="font-bold"> Zemlja Snova</span>
                 <div className="flex justify-center items-center">
                     <a href="https://www.instagram.com/zemljasnova/">
                         <svg className="h-6 w-6 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"

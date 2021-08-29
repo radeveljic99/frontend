@@ -1,56 +1,63 @@
 let proizvodi =
     [  {
-            'ime': 'Haljina Žuta    ',
+            'id' : 1,
+            'naziv': 'Haljina Žuta    ',
             'cijena': 120,
-            'putanja': './img/zs1.png'
+            'putanja': '/img/zs1.png',
+        },
+        {
+            'id' : 2,
+            'naziv': 'Haljina Narandzasta',
+            'cijena': 50,
+            'putanja': '/img/zs2.png'
+        },
+        {
+            'id' : 3,
+            'naziv': 'Haljina sa cvjetovima',
+            'cijena': 50,
+            'putanja': '/img/zs3.png'
 
         },
         {
+            'id' : 4,
+            'naziv': 'Narandzasta haljina sa cvjetovima',
+            'cijena': 50,
+            'putanja': '/img/zs4.png'
+
+        },
+        {
+            'id' : 5,
+            'naziv': 'Haljina Narandzasta',
+            'cijena': 50,
+            'putanja': '/img/zs5.png'
+
+        },
+        {
+            'id' : 6,
             'ime': 'Haljina Narandzasta',
             'cijena': 50,
-            'putanja': './img/zs2.png'
+            'putanja': '/img/zs6.png'
 
         },
         {
-            'ime': 'Haljina sa cvjetovima',
-            'cijena': 50,
-            'putanja': './img/zs3.png'
-
-        },
-        {
-            'ime': 'Narandzasta haljina sa cvjetovima',
-            'cijena': 50,
-            'putanja': './img/zs4.png'
-
-        },
-        {
+            'id' : 7,
             'ime': 'Haljina Narandzasta',
             'cijena': 50,
-            'putanja': './img/zs5.png'
+            'putanja': '/img/zs7.png'
 
         },
         {
-            'ime': 'Haljina Narandzasta',
+            'id' : 8,
+            'naziv': 'Haljina Narandzasta',
             'cijena': 50,
-            'putanja': './img/zs6.png'
+            'putanja': '/img/zs8.png'
 
         },
         {
-            'ime': 'Haljina Narandzasta',
+            'id' : 9,
+            'naziv': 'Haljina Narandzasta',
             'cijena': 50,
-            'putanja': './img/zs7.png'
-
-        },
-        {
-            'ime': 'Haljina Narandzasta',
-            'cijena': 50,
-            'putanja': './img/zs8.png'
-
-        },
-        {
-            'ime': 'Haljina Narandzasta',
-            'cijena': 50,
-            'putanja': './img/zs9.png'
+            'putanja': '/img/zs9.png'
 
         }
     ]

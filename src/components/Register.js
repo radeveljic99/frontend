@@ -1,7 +1,54 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+
+ const qs = require('querystring');
 
 class Register extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            'email' :'',
+            'password':''
+        }
+    }
+
+    emailChanged = event => {
+        this.setState({
+            email: event.target.value
+        });
+    }
+
+    passwordChanged = event => {
+        this.setState(
+            {
+                password: event.target.value
+            }
+        )
+    }
+
+    onButtonClick = (event) => {
+        event.preventDefault();
+        let data = {
+            'email': this.state.email,
+            'password': this.state.password,
+            returnSecureToken: true
+        };
+        axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC9jSuPN8I1_T7UsVEqB1ZcvrR4wV_u8N4",
+            qs.stringify(data)).then(
+            (response) => {
+                window.alert("Register succesfull");
+                localStorage.setItem('token', response.data.idToken);
+                this.props.history.push('/');
+            }
+        ).catch(err => {
+            window.alert('error');
+            console.log(err);
+        });
+
+
+    }
 
     render(){
         return <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">
@@ -13,37 +60,20 @@ class Register extends React.Component {
                         <label htmlFor="email">Email </label>
                         <br/>
                             <input type="email" id="email"
-                                   className="rounded-md px-5 rounded border-2 border-red-400 w-64"/>
+                                   className="rounded-md px-5 rounded border-2 border-red-400 w-64"
+                            value={this.state.email} onChange={this.emailChanged}/>
                     </div>
                     <div className="pd-5">
                         <label htmlFor="password">Lozinka</label>
                         <br/>
                             <input type="password" id="password"
-                                   className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"/>
+                                   className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
+                            value={this.state.password} onChange={this.passwordChanged}/>
                     </div>
-
-                    <div className="pd-5">
-                        <label htmlFor="confirmPassword">Potvrdi lozinku</label>
-                        <br/>
-                            <input type="password" id="confirmPassword"
-                                   className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"/>
-                    </div>
-
-                    <div className="pd-5">
-                        <label htmlFor="name">Ime</label>
-                        <br/>
-                            <input type="text" id="name" className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"/>
-                    </div>
-                    <div className="pd-5">
-                        <label htmlFor="lastname">Prezime</label>
-                        <br/>
-                            <input type="text" id="lastname"
-                                   className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"/>
-                    </div>
-
-
-                    <button type="submit"
-                            className="mt-5 border-2 text-center border-red-400  rounded-md  font-semibold  text-red-600 hover:bg-red-400 hover:text-white flex items-center justify-center">
+                    <button
+                            className="mt-5 border-2 text-center border-red-400  rounded-md  font-semibold  text-red-600
+                             hover:bg-red-400 hover:text-white flex items-center justify-center"
+                                onClick={this.onButtonClick}>
                         Registruj se
                     </button>
                     <hr className="border mt-5 mb-3 "/>
