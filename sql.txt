@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2021 at 06:57 PM
+-- Generation Time: Aug 30, 2021 at 09:32 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `zemlja_snova`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'Proljeće/Ljeto'),
+(3, 'Šeširi'),
+(5, 'Torbe'),
+(6, 'Šalovi'),
+(9, 'Rukavice');
 
 -- --------------------------------------------------------
 
@@ -47,7 +69,7 @@ INSERT INTO `product` (`id`, `name`, `price`, `path`, `category_id`) VALUES
 (5, 'Haljina sa cvjetovima', '50.00', '/img/zs3.png', 1),
 (6, 'Narandzasta haljina sa cvjetovima', '72.00', '/img/zs4.png', 1),
 (7, 'Kafene rukavice', '15.00', '/img/zs12.png', 9),
-(8, 'Crne rukavice', '13.00', '/img/zs13.png', 9),
+(8, 'Crne kožne rukavice', '13.00', '/img/zs13.png', 9),
 (9, 'Tamnoplave Rukavice', '20.00', '/img/zs14.png', 9),
 (10, 'Braon zimske rukavice', '25.00', '/img/zs15.png', 9),
 (11, 'Kuhinjske rukavice', '25.00', '/img/zs16.jpg', 9),
@@ -59,6 +81,12 @@ INSERT INTO `product` (`id`, `name`, `price`, `path`, `category_id`) VALUES
 --
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -68,6 +96,12 @@ ALTER TABLE `product`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `product`
