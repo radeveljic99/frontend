@@ -8,16 +8,41 @@ class Navbar extends React.Component {
         super(props);
         this.state = {};
         this.state.itemsNumber = 2;
-        if (localStorage.getItem('token')) {
-            this.state.loggedIn = true;
+        this.state.loggedIn = !!localStorage.getItem('token');
+        this.state.email = '';
+        if(!!localStorage.getItem('email')) {
+            this.state.email = localStorage.getItem('email');
         }
-        this.state.loggedIn = false;
-        this.state.email = 'radeveljic99@gmail.com'
-
+        // window.addEventListener('storage', () => {
+        //     console.log('ls changed');
+        // });
+        this.state.username = this.state.email.substring(0, this.state.email.indexOf('@'));
         console.log(this.state);
     }
 
+    componentDidMount() {
+        // window.addEventListener("storage",(e) => {
+        //     this.setState({ loggedIn: true});
+        // });
+
+
+    }
+
+    logout = (event) => {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        this.setState({
+            loggedIn:false
+        })
+        this.props.loggedInChange(false);
+    }
+
     render() {
+        const {
+            loggedIn
+        } = this.props;
+
+        console.log({ loggedIn });
         return <div>
             <nav
                 className="flex justify-around bg-gray-200 items-center space-y-1 border-b-2 b border-red-400
@@ -55,18 +80,25 @@ class Navbar extends React.Component {
                         </Link>
                     </div>
 
-                    {this.state.loggedIn === true ? <div className="border-2 border-red-400 mb-1 p-2 rounded-2xl text-red-600 font-semibold  hover:bg-red-400
+                    {loggedIn === false ? <div className="border-2 border-red-400 mb-1 p-2 rounded-2xl text-red-600 font-semibold  hover:bg-red-400
             hover:text-white">
                         <Link to='/login'>Prijava</Link>
                     </div> : ''}
-                    {this.state.loggedIn === true ?
+                    {loggedIn === false ?
                         <div className="border-2 border-red-400  mb-1 p-2 rounded-2xl text-red-600 font-semibold  hover:bg-red-400
             hover:text-white ">
                             <Link to='/register'>Registruj se </Link>
                         </div> : ''
                     }
                     {
-                        this.state.loggedIn === true ? <p>this.state.email</p> : ''
+                        loggedIn === true ? <div className="border-2 border-red-400  mb-1 p-2 rounded-2xl
+                        text-red-600 font-semibold  hover:bg-red-400 hover:text-white ">
+                            <Link to='/#' onClick={this.logout}>Izloguj se </Link>
+                        </div> : ''
+                    }
+                    {
+                        loggedIn === true ?
+                            <p className="text-center mt-3 ml-3">{this.state.username}</p> : ''
                     }
 
                 </div>

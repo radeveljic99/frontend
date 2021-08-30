@@ -9,28 +9,40 @@ import ProizvodDetalji from "./components/ProizvodDetalji";
 import Korpa from "./components/Korpa";
 import React from "react";
 
+
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            email: '',
+            password: ''
+        };
         this.state.loggedIn = false;
     }
-    
+
     handleLoginOrRegister = (data) => {
+        console.log('test');
+        console.log(this);
         this.setState({loggedIn: data})
     }
 
     render() {
         return <div>
             <Router>
-                    <Navbar loggedIn={this.state.loggedIn} loggedInChange={this.handleLoginOrRegister}/>
+                <Navbar loggedIn={this.state.loggedIn}
+                        email={this.state.email}
+                        password={this.state.password}
+                        loggedInChange={this.handleLoginOrRegister}/>
+                <Switch>
+
                     <Route exact path='/' component={Pocetna}/>
-                    <Route path='/login' component={Login}/>
+                    <Route path='/login' component={() => <Login handleLogin={this.handleLoginOrRegister.bind(this)}/>}/>
                     <Route path='/register' component={Register}/>
                     <Route path='/productDetails/:id' component={ProizvodDetalji}/>
                     <Route path='/cart' component={Korpa}/>
-                    <Footer/>
+                </Switch>
+                <Footer/>
             </Router>
         </div>
     }

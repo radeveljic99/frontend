@@ -41,8 +41,8 @@ class Proizvod extends React.Component {
 
     render() {
         return <div
-            className="col rounded-xl bg-white border-gray-200 shadow-md overflow-hidden hover:shadow-2xl cursor-pointer">
-            <Link onClick={this.redirectToProductDetails.bind(
+            className="col rounded-xl bg-white border-gray-200 shadow-md overflow-hidden hover:shadow-2xl cursor-pointer bg-gray-200">
+            <Link to='/#' onClick={this.redirectToProductDetails.bind(
                 this, this.props.id, this.props.naziv, this.props.cijena, this.props.putanja)}>
                 <img src={this.props.putanja}
                      alt="Zemlja Snova"
@@ -55,7 +55,7 @@ class Proizvod extends React.Component {
             <div className="flex justify-center items-center m-2">
                 <div className="text-center w-36 border-2 border-red-400 mb-1 p-2 rounded-2xl text-red-600 font-semibold  hover:bg-red-400
                    hover:text-white">
-                    <Link onClick={this.addToCart.bind(this,
+                    <Link  to='/#' onClick={this.addToCart.bind(this,
                         this.props.id, this.props.naziv, this.props.cijena, this.props.putanja)}>Dodaj u korpu</Link>
                 </div>
             </div>

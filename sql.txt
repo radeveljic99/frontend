@@ -1,0 +1,91 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 30, 2021 at 06:57 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.27
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `zemlja_snova`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `price` decimal(7,2) DEFAULT NULL,
+  `path` varchar(500) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `price`, `path`, `category_id`) VALUES
+(1, 'Haljina Žuta Made in Turkey', '120.00', '/img/zs1.png', 1),
+(2, 'Haljina Narandzasta Pruge', '70.00', '/img/zs2.png', 1),
+(3, 'Šešir plavi', '40.00', '/img/zs10.png', 3),
+(4, 'Crvene rukavice', '10.00', '/img/zs11.png', 9),
+(5, 'Haljina sa cvjetovima', '50.00', '/img/zs3.png', 1),
+(6, 'Narandzasta haljina sa cvjetovima', '72.00', '/img/zs4.png', 1),
+(7, 'Kafene rukavice', '15.00', '/img/zs12.png', 9),
+(8, 'Crne rukavice', '13.00', '/img/zs13.png', 9),
+(9, 'Tamnoplave Rukavice', '20.00', '/img/zs14.png', 9),
+(10, 'Braon zimske rukavice', '25.00', '/img/zs15.png', 9),
+(11, 'Kuhinjske rukavice', '25.00', '/img/zs16.jpg', 9),
+(12, 'Zimski sareni Sal', '15.00', '/img/zs16.png', 6),
+(13, 'Zimski sareni Sal 2', '15.00', '/img/zs17.png', 6);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

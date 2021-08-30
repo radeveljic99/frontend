@@ -22,10 +22,14 @@ class ProizvodDetalji extends React.Component {
     }
 
     render() {
+        const divStyle = {
+            width : "65vw",
+            height : "85vh"
+        }
         return <div>
             <h1 className="text-3xl text-red-600 text-center m-5 p-5"> Detalji o proizvodu </h1>
-            <div className="flex justify-around items-baseline m-5 pb-5">
-                <div className="grid grid-cols-2 grid-flow-row rounded-xl border border-red-400  shadow-xl">
+            <div className="flex justify-around items-baseline m-5 pb-5 " >
+                <div className="grid grid-cols-2 grid-flow-row rounded-xl shadow-xl bg-gray-200" style={{width:'65vw', height:'90vh'}}>
                     <div className="p-3 "><img src={this.state.putanja} alt="Zemlja Snova" className="rounded-xl object-cover"
                                                style={{width: '35vw', height:'40vw'}} /></div>
                     <div className="m-5 p-5 text-center">
@@ -43,9 +47,9 @@ class ProizvodDetalji extends React.Component {
                         </div>
 
                         <div className="flex justify-around items-end h-52">
-                            <div className="text-center w-36 border-2 border-red-400 mb-1 p-2 rounded-2xl text-red-600 font-semibold  hover:bg-red-400
-                    hover:text-white">
-                                <Link onClick={this.addToCart.bind(this,
+                            <div className="text-center w-36 border-2 border-red-400 mb-5 p-2 rounded-2xl text-red-600
+                            font-semibold  hover:bg-red-400 hover:text-white">
+                                <Link to='/#' onClick={this.addToCart.bind(this,
                                     this.props.id, this.state.naziv, this.state.cijena, this.state.putanja)}>Dodaj u korpu</Link>
                             </div>
                         </div>

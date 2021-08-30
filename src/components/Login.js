@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import axios from "axios";
 
 const qs = require('querystring');
@@ -12,7 +12,6 @@ class Login extends React.Component {
         this.state.loggedIn = false;
     }
 
-    // const qs = require('querystring');
 
     emailChanged = event => {
         this.setState({
@@ -39,11 +38,14 @@ class Login extends React.Component {
         axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC9jSuPN8I1_T7UsVEqB1ZcvrR4wV_u8N4",
             qs.stringify(data)).then(
             response => {
-                window.alert("Succesfully logged in");
+                // window.alert("Succesfully logged in");
                 localStorage.setItem('token', response.data.idToken);
-                this.props.history.push('/', {loggedIn:true});
+                localStorage.setItem('email', this.state.email);
+                this.props.history.push('/', {loggedIn: true});
+                this.props.handleLogin(true);
+
             },
-            (err) => {
+            err => {
                 window.alert('error');
             }
         );
@@ -89,4 +91,4 @@ class Login extends React.Component {
 
 }
 
-export default Login;
+export default withRouter(Login);
