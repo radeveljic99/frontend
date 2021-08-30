@@ -9,22 +9,21 @@ class KorpaProizvod extends React.Component {
     }
 
     render() {
-        return <div className="flex justify-around items-center">
-            <div className="grid grid-cols-3  rounded-lg  m-5  shadow-xl ">
+        return <div className="flex justify-around items-center ">
+            <div className="grid grid-cols-3  rounded-lg  m-5 bg-gray-100 shadow-xl ">
                 <div className="col-span-1 w-64 flex items-center justify-around ml-5 p-2">
                     <img src={this.props.putanja} alt="Zemlja Snova" className="rounded-md h-72 mr-3 object-cover"/>
                 </div>
                 <div className="col-span-2 w-full text-center">
                     <div className="flex justify-around items-center border-b-2 border-gray-300 m-3 p-2">
-                        <div className="uppercase text-center">naziv proizvoda</div>
-                        <div className="uppercase text-center">{this.props.nazivProizvoda}</div>
+                        <div className=" text-center">{this.props.nazivProizvoda}</div>
                     </div>
                     <div className="flex justify-around items-center border-b-2 border-gray-300 m-3 p-2">
-                        <div className="uppercase text-center">cijena proizvoda</div>
+                        <div className=" text-center">Cijena proizvoda</div>
                         <div className="uppercase text-center">€ {this.props.cijenaProizvoda}</div>
                     </div>
                     <div className="flex justify-around items-center border-b-2 border-gray-300 m-3 p-2">
-                        <label htmlFor="amount">Kolicina</label>
+                        <label htmlFor="amount">Količina</label>
                         <input type="number" id="#amount" className="border-2 border-black rounded-lg"
                                value={this.state.amount > 1 ? this.state.amount : 0}
                         />

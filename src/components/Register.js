@@ -27,7 +27,6 @@ class Register extends React.Component {
             }
         )
     }
-
     onButtonClick = (event) => {
         event.preventDefault();
         let data = {
@@ -46,14 +45,12 @@ class Register extends React.Component {
             window.alert('error');
             console.log(err);
         });
-
-
     }
 
     render(){
         return <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">
 
-            <form action="" className="flex m-5 p-5 flex-col border-2 rounded-md border-red-400 shadow-lg">
+            <form className="flex m-5 p-5 flex-col border-2 rounded-md border-red-400 bg-gray-100 shadow-lg">
                 <h1 className="text-center text-2xl">Registruj se</h1>
                 <hr className="border mt-2"/>
                     <div className="pt-5">
@@ -84,9 +81,7 @@ class Register extends React.Component {
                         </div>
             </form>
         </div>
-
     }
-
 }
 
 export default Register;

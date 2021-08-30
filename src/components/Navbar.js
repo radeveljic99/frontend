@@ -13,19 +13,8 @@ class Navbar extends React.Component {
         if(!!localStorage.getItem('email')) {
             this.state.email = localStorage.getItem('email');
         }
-        // window.addEventListener('storage', () => {
-        //     console.log('ls changed');
-        // });
         this.state.username = this.state.email.substring(0, this.state.email.indexOf('@'));
         console.log(this.state);
-    }
-
-    componentDidMount() {
-        // window.addEventListener("storage",(e) => {
-        //     this.setState({ loggedIn: true});
-        // });
-
-
     }
 
     logout = (event) => {

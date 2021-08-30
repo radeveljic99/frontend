@@ -12,7 +12,6 @@ class Login extends React.Component {
         this.state.loggedIn = false;
     }
 
-
     emailChanged = event => {
         this.setState({
             email: event.target.value
@@ -53,7 +52,7 @@ class Login extends React.Component {
 
     render() {
         return <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">
-            <form action="" className="flex m-5 p-5 flex-col border-2 rounded-md border-red-400 shadow-lg">
+            <form action="" className="flex m-5 p-5 flex-col bg-gray-100 border-2 rounded-md border-red-400 shadow-lg">
                 <h1 className="text-center text-2xl">Prijavi se</h1>
                 <hr className="border mt-2"/>
                 <div className="pt-2">

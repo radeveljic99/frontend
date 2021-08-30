@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import ProizvodDetalji from "./components/ProizvodDetalji";
 import Korpa from "./components/Korpa";
 import React from "react";
+import axios from "axios";
 
 
 class App extends React.Component {
@@ -18,8 +19,12 @@ class App extends React.Component {
             email: '',
             password: ''
         };
-        this.state.loggedIn = false;
+        this.state.loggedIn = !!localStorage.getItem('token');
+        this.state.selectedCategory={id:1, name:'Proljece/Ljeto'};
+
     }
+
+
 
     handleLoginOrRegister = (data) => {
         console.log('test');
@@ -36,7 +41,7 @@ class App extends React.Component {
                         loggedInChange={this.handleLoginOrRegister}/>
                 <Switch>
 
-                    <Route exact path='/' component={Pocetna}/>
+                    <Route exact path='/' component={() => <Pocetna/>}/>
                     <Route path='/login' component={() => <Login handleLogin={this.handleLoginOrRegister.bind(this)}/>}/>
                     <Route path='/register' component={Register}/>
                     <Route path='/productDetails/:id' component={ProizvodDetalji}/>

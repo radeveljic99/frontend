@@ -12,13 +12,17 @@ class ProizvodDetalji extends React.Component {
 
     addToCart(id, naziv, cijena, putanja, event) {
         event.preventDefault();
-        korpaElementi.push({
-            'id': id,
-            'naziv': naziv,
-            'cijena': cijena,
-            'putanja': putanja,
-        });
-        this.props.history.push({pathname: '/cart'});
+        if (!!localStorage.getItem('token')) {
+            korpaElementi.push({
+                'id': id,
+                'naziv': naziv,
+                'cijena': cijena,
+                'putanja': putanja,
+            });
+            this.props.history.push({pathname: '/cart'});
+        } else {
+            window.alert('Prijavi se ili registruj da bi dodao u korpu');
+        }
     }
 
     render() {
@@ -27,8 +31,8 @@ class ProizvodDetalji extends React.Component {
             height : "85vh"
         }
         return <div>
-            <h1 className="text-3xl text-red-600 text-center m-5 p-5"> Detalji o proizvodu </h1>
-            <div className="flex justify-around items-baseline m-5 pb-5 " >
+            <h1 className="text-3xl text-red-600 text-center m-1 p-3"> Detalji o proizvodu </h1>
+            <div className="flex justify-around items-baseline m-3 pb-2 " >
                 <div className="grid grid-cols-2 grid-flow-row rounded-xl shadow-xl bg-gray-200" style={{width:'65vw', height:'90vh'}}>
                     <div className="p-3 "><img src={this.state.putanja} alt="Zemlja Snova" className="rounded-xl object-cover"
                                                style={{width: '35vw', height:'40vw'}} /></div>
