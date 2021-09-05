@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2021 at 09:32 PM
+-- Generation Time: Sep 05, 2021 at 10:01 PM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `zemlja_snova`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -74,11 +86,54 @@ INSERT INTO `product` (`id`, `name`, `price`, `path`, `category_id`) VALUES
 (10, 'Braon zimske rukavice', '25.00', '/img/zs15.png', 9),
 (11, 'Kuhinjske rukavice', '25.00', '/img/zs16.jpg', 9),
 (12, 'Zimski sareni Sal', '15.00', '/img/zs16.png', 6),
-(13, 'Zimski sareni Sal 2', '15.00', '/img/zs17.png', 6);
+(13, 'Zimski sareni Sal 2', '15.00', '/img/zs17.png', 6),
+(14, 'Crveni Zimski šal', '24.00', '/img/zs18.png', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `balance` decimal(7,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `lastname`, `email`, `balance`) VALUES
+(1, 'Miljan', 'Veljic', 'miljan11@hotmail.com', '1000.00'),
+(2, 'Rade', 'Velic', 'rade.veljic99@gmail.com', '2000.00'),
+(5, 'Mia', 'Djolovic', 'miadjolovic99@gmiail.com', '100.00'),
+(6, 'Luka', 'Boljevic', 'lukaboljevic@gmail.com', '2000.00'),
+(7, 'Andrija', 'Zivkovic', 'andrija.zivkovic@gmial.com', '1000.00'),
+(13, 'Ivona', 'Cetkovic', 'ivonacetkovic@gmail.com', '100.00'),
+(14, 'Biljana', 'Veljic', 'biljanaveljic@gmail.com', '2000.00'),
+(15, 'Petar', 'Sekulic', 'petar.sekulic@fleka.me', '3365.00'),
+(16, 'Ivan', 'Mitric', 'ivan.mitric@fleka.me', '209.00'),
+(17, 'Ognjen', 'Boskovic', 'ognjen.boskovic@fleka.me', '700.00'),
+(18, 'Danijela', 'Markovic', 'danijela.markovic@fleka.me', '9000.00'),
+(19, 'Mark', 'Khramko', 'mark.khramko@fleka.me', '2999.00'),
+(20, 'Miodrag', 'Racic', 'miodrag.racic@fleka.me', '200.00'),
+(21, 'Marko', 'Lekic', 'marko.lekic@fleka.me', '20852.00');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `category`
@@ -94,8 +149,20 @@ ALTER TABLE `product`
   ADD KEY `category_id` (`category_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -107,11 +174,24 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `product`
