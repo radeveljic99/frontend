@@ -2,19 +2,20 @@ import React from "react";
 import {Redirect, withRouter} from 'react-router-dom';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import {useHistory} from "react-router-dom";
-import korpaElementi from "../data/korpaElementi";
+import axios from "axios";
 
-
+const qs = require('querystring');
 class Proizvod extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.state = {
             isClicked: false
         };
     }
 
-    redirectToProductDetails(id, naziv, cijena, putanja, event) {
+    redirectToProductDetails(id, naziv, cijena, putanja, kategorija, event) {
         event.preventDefault();
         this.props.history.push(
             {
@@ -24,6 +25,7 @@ class Proizvod extends React.Component {
                     'naziv': naziv,
                     'cijena': cijena,
                     'putanja': putanja,
+                    'kategorija':kategorija
                 }
             });
     }
@@ -31,24 +33,28 @@ class Proizvod extends React.Component {
     addToCart(id, naziv, cijena, putanja, event) {
         event.preventDefault();
         if (!!localStorage.getItem('token')) {
-            korpaElementi.push({
-                'id': id,
-                'naziv': naziv,
-                'cijena': cijena,
-                'putanja': putanja,
-            });
-            this.props.history.push({pathname: '/cart'});
+            axios.post('http://localhost:5000/cartProducts', qs.stringify({
+                productId : id,
+                userId : localStorage.getItem('userId')
+            })).then(
+                response => {
+                    localStorage.setItem('brojElemenataUKorpi', +localStorage.getItem('brojElementaUKorpi') + 1);
+                    this.props.history.push({pathname: '/cart'});
+                },
+                error => {
+                    window.alert(error);
+                }
+            )
         } else {
             window.alert('Prijavi se ili registruj da bi dodao u korpu');
         }
-
     }
 
     render() {
         return <div
-            className="col rounded-xl bg-white border-gray-200 shadow-md overflow-hidden hover:shadow-2xl cursor-pointer bg-gray-200">
+            className="col rounded-xl bg-white border-gray-200 shadow-md overflow-hidden w-72 hover:shadow-2xl cursor-pointer bg-gray-300">
             <Link to='/#' onClick={this.redirectToProductDetails.bind(
-                this, this.props.id, this.props.naziv, this.props.cijena, this.props.putanja)}>
+                this, this.props.id, this.props.naziv, this.props.cijena, this.props.putanja,  this.props.kategorija.name)}>
                 <img src={this.props.putanja}
                      alt="Zemlja Snova"
                      className="w-72 h-80 object-cover"/>

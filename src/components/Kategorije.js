@@ -1,5 +1,4 @@
 import React from "react";
-import kategorije from "../data/kategorije";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -44,7 +43,7 @@ class Kategorije extends React.Component {
             <ul className="space-x-5 ml-5 space-y-1 text-md">
                 {
                     this.state.kategorije.map((kategorija) => <li key={kategorija.id}
-                                                                  className="ml-5 rounded-lg hover:bg-gray-200 ">
+                                                                  className="ml-5 px-5 py-1 rounded-lg hover:bg-red-400 hover:cursor-pointer">
                         <Link to='/'
                               onClick={this.categoryClicked.bind(this, kategorija.name, kategorija.id)}>{kategorija.name}</Link>
                     </li>)

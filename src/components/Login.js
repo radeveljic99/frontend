@@ -26,29 +26,42 @@ class Login extends React.Component {
         )
     }
 
-    onButtonClick = (event) => {
+    addUserIdToStorage() {
+        let email = localStorage.getItem('email');
+        axios.get(`http://localhost:5000/users/email/${email}`).then(
+            response => {
+                localStorage.setItem('userId', response.data.id);
+                localStorage.setItem('userMoney', response.data.balance);
+            },
+            err => {
+                window.alert('Error ' , err );
+            }
+        )
+    }
+
+    onButtonClick = event => {
         event.preventDefault();
         let data = {
             email: this.state.email,
             password: this.state.password,
             returnSecureToken: true
         };
-
         axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC9jSuPN8I1_T7UsVEqB1ZcvrR4wV_u8N4",
             qs.stringify(data)).then(
             response => {
-                // window.alert("Succesfully logged in");
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('email', this.state.email);
                 this.props.history.push('/', {loggedIn: true});
                 this.props.handleLogin(true);
-
+                this.addUserIdToStorage();
             },
             err => {
-                window.alert('error');
+                window.alert('Error ', err);
             }
         );
     }
+
+
 
     render() {
         return <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">

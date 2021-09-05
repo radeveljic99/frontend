@@ -9,6 +9,7 @@ import ProizvodDetalji from "./components/ProizvodDetalji";
 import Korpa from "./components/Korpa";
 import React from "react";
 import axios from "axios";
+import AdminPanel from "./components/AdminPanel";
 
 
 class App extends React.Component {
@@ -17,19 +18,23 @@ class App extends React.Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            amountOfProducts: 0
         };
         this.state.loggedIn = !!localStorage.getItem('token');
-        this.state.selectedCategory={id:1, name:'Proljece/Ljeto'};
-
+        // this.state.selectedCategory = {id: 1, name: 'Proljece/Ljeto'};
     }
-
-
 
     handleLoginOrRegister = (data) => {
         console.log('test');
         console.log(this);
         this.setState({loggedIn: data})
+    }
+
+    cartChanged = () => {
+        this.setState({
+            amountOfProducts: localStorage.getItem('brojElemenataUKorpi')
+        });
     }
 
     render() {
@@ -38,14 +43,17 @@ class App extends React.Component {
                 <Navbar loggedIn={this.state.loggedIn}
                         email={this.state.email}
                         password={this.state.password}
-                        loggedInChange={this.handleLoginOrRegister}/>
-                <Switch>
+                        loggedInChange={this.handleLoginOrRegister}
+                        cartChanged={this.cartChanged}
+                        amount={this.state.amountOfProducts}/>
 
+                <Switch>
                     <Route exact path='/' component={() => <Pocetna/>}/>
-                    <Route path='/login' component={() => <Login handleLogin={this.handleLoginOrRegister.bind(this)}/>}/>
-                    <Route path='/register' component={Register}/>
+                    <Route path='/login' component={() => <Login handleLogin={this.handleLoginOrRegister}/>}/>
+                    <Route path='/register' component={() => <Register handleRegister={this.handleLoginOrRegister}/>}/>
                     <Route path='/productDetails/:id' component={ProizvodDetalji}/>
-                    <Route path='/cart' component={Korpa}/>
+                    <Route path='/cart' component={() => <Korpa amountChanged={this.cartChanged}/>}/>
+                    <Route path='/admin' component={() => <AdminPanel/>}/>
                 </Switch>
                 <Footer/>
             </Router>
