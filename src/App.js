@@ -10,6 +10,7 @@ import Korpa from "./components/Korpa";
 import React from "react";
 import axios from "axios";
 import AdminPanel from "./components/AdminPanel";
+import FirebaseTest from "./components/FirebaseTest";
 
 
 class App extends React.Component {
@@ -22,18 +23,22 @@ class App extends React.Component {
             amountOfProducts: 0
         };
         this.state.loggedIn = !!localStorage.getItem('token');
-        // this.state.selectedCategory = {id: 1, name: 'Proljece/Ljeto'};
+        this.state.search='';
     }
 
     handleLoginOrRegister = (data) => {
-        console.log('test');
-        console.log(this);
         this.setState({loggedIn: data})
     }
 
     cartChanged = () => {
         this.setState({
             amountOfProducts: localStorage.getItem('brojElemenataUKorpi')
+        });
+    }
+
+    searchChanged = (searchParam) => {
+        this.setState({
+            search : searchParam
         });
     }
 
@@ -44,16 +49,17 @@ class App extends React.Component {
                         email={this.state.email}
                         password={this.state.password}
                         loggedInChange={this.handleLoginOrRegister}
+                        searchChanged={this.searchChanged}
                         cartChanged={this.cartChanged}
                         amount={this.state.amountOfProducts}/>
-
                 <Switch>
-                    <Route exact path='/' component={() => <Pocetna/>}/>
+                    <Route exact path='/' component={() => <Pocetna search={this.state.search}/>}/>
                     <Route path='/login' component={() => <Login handleLogin={this.handleLoginOrRegister}/>}/>
                     <Route path='/register' component={() => <Register handleRegister={this.handleLoginOrRegister}/>}/>
                     <Route path='/productDetails/:id' component={ProizvodDetalji}/>
                     <Route path='/cart' component={() => <Korpa amountChanged={this.cartChanged}/>}/>
                     <Route path='/admin' component={() => <AdminPanel/>}/>
+                    <Route path='/test' component={FirebaseTest} />
                 </Switch>
                 <Footer/>
             </Router>

@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
-import storage from "../firebase";
+import {withRouter} from "react-router-dom";
 
+// import storage from "../firebase";
+const qs = require('querystring');
 
 class AdminPanel extends React.Component {
 
@@ -11,8 +13,8 @@ class AdminPanel extends React.Component {
         this.state.image = null;
         this.state.kategorije = [];
         this.state.selectedCategoryId = 0;
-        this.state.file = null;
-        this.state.data = [];
+        this.state.productName = "";
+        this.state.productPrice = 0;
     }
 
     componentDidMount() {
@@ -24,7 +26,7 @@ class AdminPanel extends React.Component {
                 console.log(this.state);
             },
             error => {
-                window.alert("Error while loading cateogories ", error);
+                window.alert("Error while loading categories " +  error);
             }
         );
 
@@ -37,14 +39,12 @@ class AdminPanel extends React.Component {
                 console.log(this.state);
             },
             error => {
-                window.alert("Error while loading cateogories ", error);
+                window.alert("Error while loading cateogories " + error);
             }
         );
-
-
     }
 
-    handleChange = event => {
+    handleCategoryChange = event => {
         event.preventDefault();
         console.log("category = " + event.target.value);
         this.setState({
@@ -52,93 +52,63 @@ class AdminPanel extends React.Component {
         });
     }
 
-    onButtonClick = event => {
+
+    onButtonClick = (event) => {
         event.preventDefault();
-        console.log(this.state);
-        if (this.state.image == null)
-            return;
-        storage.ref(`/img/${this.state.image.name}`).put(this.state.image)
-            .on("state_changed", alert("success"), alert);
+        console.log("Dugme je kliknuto ")
+        let data = new FormData();
+        data.append("name", this.state.image.name);
+        data.append("file", this.state.image);
+        axios.post('http://localhost:5000/addPicture', data).then(
+            response => {
+                window.alert("Slika uspjesno dodata");
 
+            },
+            error => {
+                window.alert("Error " +  error);
+            }
+        );
 
+        let productData = {
+            name: this.state.productName,
+            price: this.state.productPrice,
+            path: `/img/${this.state.image.name}`,
+            category_id: this.state.selectedCategoryId
+        }
+        console.log(productData);
+        axios.post("http://localhost:5000/products", qs.stringify(productData)).then(
+            response => {
+                window.alert("Product successfully added");
+                this.props.history.push('/')
+                console.log(response);
+            },
+            error => {
+                window.alert("Error while adding product " +  error);
+            }
+        )
     }
 
-    // let files = event.target.files;
-    // console.log(files);
-    //
-    // let reader = new FileReader();
-    // reader.readAsDataURL(files[0]);
-    // reader.onload = event => {
-    //     console.log(' img data ', event.target.result);
-    // }
-
-    // console.log(event.target.files[0]);
-    // if (event.target.files[0]) {
-    //     this.setState({
-    //         file: URL.createObjectURL(event.target.files[0])
-    //     })
-    // }
-
-    onChange = event => {
-        // console.log('On change called');
-        // const reader = new FileReader();
-        // let file = event.target.files[0];
-        // if (file) {
-        //     reader.onload = () => {
-        //         if (reader.readyState === 2) {
-        //             console.log(file);
-        //             this.setState({
-        //                 image: file
-        //             });
-        //         }
-        //     };
-        //     reader.readAsDataURL(event.target.files[0]);
-        // } else {
-        //     this.setState({
-        //         image: null
-        //     });
-        // }
+    onFileChange = event => {
+        console.log(event.target.files[0]);
         this.setState({
-            image:event.target.files[0]
+            image: event.target.files[0]
         });
     }
 
-    // uploadToFirebase = () => {
-    //     console.log(this.state);
-    //     if (this.state.image) {
-    //         window.alert('USO');
-    //         console.log(this.state.image);
-    //         const storageRef = storage.ref();
-    //         const imageRef = storageRef.child(this.state.image.name);
-    //         imageRef.put(this.state.image).then(
-    //             () => {
-    //                 window.alert("Image uploaded successfully to Firebase.");
-    //             },
-    //             () => {
-    //                 window.alert("Something went wrong");
-    //             });
-    //     } else {
-    //         window.alert("Please upload an image first");
-    //     }
-    // }
 
-    // getFromFirebase = () => {
-    //     let storageRef = storage.ref();
-    //     storageRef.listAll().then( (res)=> {
-    //         res.items.forEach((imageRef) => {
-    //             imageRef.getDownloadURL().then((url) => {
-    //                 window.alert("Mijenja se stanje");
-    //                 this.setState({
-    //                    allImages : [...this.state.allImages, url]
-    //                 });
-    //             })
-    //         })
-    //     })
-    // }
+    handleProductNameChanged = event => {
+        this.setState({
+            productName: event.target.value
+        })
+    }
 
-    listItems = () => {
+    handleProductPriceChanged = event => {
+        this.setState({
+            productPrice: event.target.value
+        });
 
     }
+
 
     render() {
         return <div className="h-full flex justify-center items-center gap-5 m-5 p-5 text-xl ">
@@ -152,14 +122,16 @@ class AdminPanel extends React.Component {
                         <br/>
                         <input type="text" id="name"
                                className="pd-5 rounded-md px-5 border-2 border-red-400  w-full h-auto"
+                               value={this.state.productName}
+                               onChange={this.handleProductNameChanged}
                         />
                     </div>
                     <div className="pd-5">
                         <label htmlFor="image" className="my-5 py-5 w-auto">Slika</label>
                         <br/>
-                        <input type="file" id="image" name="file" accept="image/x-png,image/jpeg"
+                        <input type="file" id="image" name="file"
                                className="pd-5 rounded-md px-5  h-auto w-auto"
-                               onChange={this.onChange}
+                               onChange={this.onFileChange}
                         />
                     </div>
 
@@ -167,7 +139,7 @@ class AdminPanel extends React.Component {
                     <br/>
                     <select name="category" id="categories" className="w-full m-2"
                             placeholder="Izaberi kategoriju "
-                            value={this.state.selectedCategoryId} onChange={this.handleChange}>
+                            value={this.state.selectedCategoryId} onChange={this.handleCategoryChange}>
                         {this.state.kategorije.map(
                             (kategorija) => <option value={kategorija.id}>{kategorija.name}</option>
                         )}
@@ -178,6 +150,8 @@ class AdminPanel extends React.Component {
                     <br/>
                     <input type="number" id="price"
                            className="pd-5 rounded-md px-5 border-2 border-red-400 w-full"
+                           value={this.state.productPrice}
+                           onChange={this.handleProductPriceChanged}
                     />
                 </div>
 
@@ -187,7 +161,6 @@ class AdminPanel extends React.Component {
                     onClick={this.onButtonClick}>
                     Dodaj Proizvod
                 </button>
-                <button onClick={this.listItems}>List Pictures</button>
                 <hr className="border mt-5 mb-3 "/>
             </form>
         </div>
@@ -195,4 +168,4 @@ class AdminPanel extends React.Component {
 
 }
 
-export default AdminPanel;
+export default withRouter(AdminPanel);

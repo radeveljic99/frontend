@@ -5,7 +5,7 @@ class Footer extends React.Component {
 
     render() {
         return <div>
-            <hr className="border border-gray-300 mb-2"/>
+            <hr className="border border-gray-500 mb-2"/>
             <footer className="text-center text-md m-5 text-gray-900">
                 @2021 Sva prava zadržana <span className="font-bold"> Zemlja Snova</span>
                 <div className="flex justify-center items-center">
@@ -21,7 +21,7 @@ class Footer extends React.Component {
                 </div>
             </footer>
         </div>
-        }
+    }
 }
 
 export default Footer;

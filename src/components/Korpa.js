@@ -11,9 +11,6 @@ class Korpa extends React.Component {
         this.state.proizvodi = [];
         this.state.userId = localStorage.getItem('userId');
         this.state.ukupnaCijena = 0;
-        console.log(this.state.proizvodi);
-
-        // this.props.amountChanged();
     }
 
     componentDidMount() {
@@ -23,13 +20,16 @@ class Korpa extends React.Component {
     handleChangeOnCartItems() {
         axios.get(`http://localhost:5000/cartProducts/${this.state.userId}}`).then(
             response => {
-                this.setState({
-                    proizvodi: response.data
-                });
-
-                for (let i = 0; i < this.state.proizvodi.length; i++) {
-                    this.state.proizvodi[i] = {...this.state.proizvodi[i], kolicina: 1};
+                let noviProizvodi = response.data;
+                console.log(noviProizvodi);
+                for (let i = 0; i < noviProizvodi.length; i++) {
+                    noviProizvodi[i].path = `http://localhost:5000${noviProizvodi[i].path}`;
+                    noviProizvodi[i] = {...noviProizvodi[i], kolicina: 1};
                 }
+                this.setState({
+                    proizvodi: noviProizvodi
+                })
+
                 console.log(this.state);
                 localStorage.setItem('brojElemenataUKorpi', response.data.length);
             },
@@ -103,15 +103,19 @@ class Korpa extends React.Component {
                 this.state.proizvodi.length == 0 ?
                     <h2 className=" text-xl p-5 m-5"> Vaša Korpa je Trenutno prazna</h2> : ''
             }
-            <div className="flex justify-around items-center ">
-                <div
-                    className="flex justify-around items-center text-center p-2 border-2 rounded-lg w-96 border-gray-300 shadow-lg">
-                    <div className="text-center w-36 border-2 border-red-400  rounded-2xl text-red-600 font-semibold  hover:bg-red-400
+            {
+                this.state.proizvodi.length > 0 ? <div className="flex justify-around items-center ">
+                    <div
+                        className="flex justify-around items-center text-center p-2 border-2 rounded-lg w-96 border-gray-300 shadow-lg">
+                        <div className="text-center w-36 border-2 border-red-400  rounded-2xl text-red-600 font-semibold  hover:bg-red-400
                    hover:text-white">
-                        <Link to='/#' onClick={this.makeOrder}>NARUČI</Link>
+
+                            <Link to='/#' onClick={this.makeOrder}>NARUČI</Link>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div> : ''
+            }
+
         </div>
     }
 }
