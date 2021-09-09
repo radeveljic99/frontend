@@ -23,11 +23,15 @@ class App extends React.Component {
             amountOfProducts: 0
         };
         this.state.loggedIn = !!localStorage.getItem('token');
-        this.state.search='';
+        this.state.search = '';
+        this.state.isAdmin = localStorage.getItem('isAdmin') == 1 ? true : false;
     }
 
     handleLoginOrRegister = (data) => {
-        this.setState({loggedIn: data})
+        this.setState({
+            loggedIn: data,
+            isAdmin: localStorage.getItem('isAdmin') == 1 ? true : false
+        })
     }
 
     cartChanged = () => {
@@ -38,7 +42,7 @@ class App extends React.Component {
 
     searchChanged = (searchParam) => {
         this.setState({
-            search : searchParam
+            search: searchParam
         });
     }
 
@@ -51,6 +55,7 @@ class App extends React.Component {
                         loggedInChange={this.handleLoginOrRegister}
                         searchChanged={this.searchChanged}
                         cartChanged={this.cartChanged}
+                        isAdmin={this.state.isAdmin}
                         amount={this.state.amountOfProducts}/>
                 <Switch>
                     <Route exact path='/' component={() => <Pocetna search={this.state.search}/>}/>
@@ -59,7 +64,7 @@ class App extends React.Component {
                     <Route path='/productDetails/:id' component={ProizvodDetalji}/>
                     <Route path='/cart' component={() => <Korpa amountChanged={this.cartChanged}/>}/>
                     <Route path='/admin' component={() => <AdminPanel/>}/>
-                    <Route path='/test' component={FirebaseTest} />
+                    {/*<Route path='/test' component={FirebaseTest}/>*/}
                 </Switch>
                 <Footer/>
             </Router>

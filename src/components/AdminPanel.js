@@ -26,7 +26,7 @@ class AdminPanel extends React.Component {
                 console.log(this.state);
             },
             error => {
-                window.alert("Error while loading categories " +  error);
+                window.alert("Error while loading categories " + error);
             }
         );
 
@@ -65,7 +65,7 @@ class AdminPanel extends React.Component {
 
             },
             error => {
-                window.alert("Error " +  error);
+                window.alert("Error " + error);
             }
         );
 
@@ -83,7 +83,7 @@ class AdminPanel extends React.Component {
                 console.log(response);
             },
             error => {
-                window.alert("Error while adding product " +  error);
+                window.alert("Error while adding product " + error);
             }
         )
     }

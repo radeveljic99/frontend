@@ -38,8 +38,10 @@ class ProizvodDetalji extends React.Component {
             <h1 className="text-3xl text-red-600 text-center m-1 p-3"> Detalji o proizvodu </h1>
             <div className="flex justify-around items-baseline m-3 pb-2" >
                 <div className="grid grid-cols-2 grid-flow-row rounded-xl shadow-xl bg-gray-300" style={{width:'65%', height:'80%'}}>
-                    <div className="p-3"><img src={this.state.putanja} alt="Zemlja Snova" className="rounded-xl object-cover mt-5"
-                                               style={{width: '90%', height:'90%'}} /></div>
+                    <div className="p-3"><img src={this.state.putanja} alt="Zemlja Snova" className="rounded-xl object-cover mt-5 w-80 h-80"
+                                               style={{width: '90%', height:'90%'}} 
+                                               
+                                               /></div>
                     <div className="text-center">
                         <div className="m-5 p-5"><h1 className="text-red-600 text-2xl mb-5 pb-5">{this.state.naziv} </h1>
                             <div className="flex justify-around items-center ">

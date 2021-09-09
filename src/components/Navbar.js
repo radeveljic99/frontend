@@ -11,12 +11,12 @@ class Navbar extends React.Component {
         this.state.loggedIn = !!localStorage.getItem('token');
         this.state.email = '';
         if (!!localStorage.getItem('email')) {
-            console.log(localStorage.getItem('email'));
             this.state.email = localStorage.getItem('email');
             this.state.itemsNumber = localStorage.getItem('brojElemenataUKorpi');
             this.state.username = this.state.email.substring(0, this.state.email.indexOf('@'));
         }
         this.state.search = '';
+        this.state.isAdmin = this.props.isAdmin;
         console.log(this.state);
     }
 
@@ -26,6 +26,7 @@ class Navbar extends React.Component {
         localStorage.removeItem('userId');
         localStorage.removeItem('brojElemenataUKorpi');
         localStorage.removeItem('email');
+        localStorage.removeItem('isAdmin');
         this.setState({
             loggedIn: false
         })
@@ -49,7 +50,7 @@ class Navbar extends React.Component {
 
     render() {
         const {
-            loggedIn
+            loggedIn, isAdmin
         } = this.props;
 
         this.state.itemsNumber = localStorage.getItem('brojElemenataUKorpi');
@@ -59,6 +60,9 @@ class Navbar extends React.Component {
             this.state.email = localStorage.getItem('email');
         }
         this.state.username = this.state.email.substring(0, this.state.email.indexOf('@'));
+        // this.state.isAdmin = i;
+        console.log(isAdmin);
+        console.log(localStorage.getItem('isAdmin'));
 
         return <div>
             <nav
@@ -119,6 +123,12 @@ class Navbar extends React.Component {
                     {
                         loggedIn === true ?
                             <p className="text-center mt-3 ml-3">{this.state.username}</p> : ''
+                    }
+                    {
+                        isAdmin ? <div className="border-2 border-red-400  mb-1 ml-5 p-2 rounded-2xl
+                        text-red-600 font-semibold  hover:bg-red-400 hover:text-white ">
+                            <Link to='/admin'>Dodaj Proizvod</Link>
+                        </div> : ''
                     }
                 </div>
             </nav>

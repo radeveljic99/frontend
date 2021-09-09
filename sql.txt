@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2021 at 08:09 PM
+-- Generation Time: Sep 09, 2021 at 09:11 PM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,9 +38,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `product_id`, `user_id`) VALUES
-(59, 4, 22),
-(60, 12, 22),
-(63, 12, 15);
+(59, 4, 22);
 
 -- --------------------------------------------------------
 
@@ -99,7 +97,11 @@ INSERT INTO `product` (`id`, `name`, `price`, `path`, `category_id`) VALUES
 (13, 'Zimski sareni Sal 2', '15.00', '/img/zs17.png', 6),
 (14, 'Crveni Zimski šal', '24.00', '/img/zs18.png', 6),
 (17, 'Zelene Zimske Rukavice', '20.00', '/img/zs19.png', 9),
-(18, 'Braon Kožna Torba', '40.00', '/img/torba1.png', 5);
+(18, 'Braon Kožna Torba', '40.00', '/img/torba1.png', 5),
+(19, 'Rukavice sa suncokretima', '25.00', '/img/rukavice1.png', 9),
+(20, 'Braon Zimske Rukavice', '26.00', '/img/brRukavice.png', 9),
+(21, 'Roze Zimski Kaput', '60.00', '/img/rozeKaput.png', 12),
+(22, 'Torba', '60.00', '/img/torba.png', 5);
 
 -- --------------------------------------------------------
 
@@ -185,13 +187,13 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`

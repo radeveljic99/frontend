@@ -9,9 +9,11 @@ class Pocetna extends React.Component {
     constructor(props) {
         super(props);
         this.state = {proizvodi: [], kategorije: []};
-        console.log(this.state);
         this.state.selectedCategory = {id: 1, name: ''};
         this.state.search = this.props.search;
+        this.state.numberOfProducts = 0;
+        this.state.productsPerPage = 6;
+        this.state.activatedPage = 1;
     }
 
     componentDidMount() {
@@ -42,12 +44,12 @@ class Pocetna extends React.Component {
                 }
             )
         }
-
     }
 
     handleCategoryChange = (categoryData) => {
         console.log(categoryData);
-        axios.get(`http://localhost:5000/categories/${categoryData.id}/products`).then(
+        axios.get(`http://localhost:5000/categories/${categoryData.id}/products?page=1&productsPerPage=
+        ${this.state.productsPerPage}`).then(
             response => {
                 this.setState({
                     proizvodi: response.data,
@@ -59,9 +61,41 @@ class Pocetna extends React.Component {
                 window.alert("Error while loading products: " + error);
             }
         );
+        axios.get(`http://localhost:5000/categories/${categoryData.id}/numberOfProducts`).then(
+            response => {
+                console.log("Broj proizvoda : ", response.data.broj_proizvoda);
+                this.setState({
+                    numberOfProducts: response.data.broj_proizvoda
+                });
+            },
+            error => {
+                window.alert("Error while retreiving number of Products " + error);
+            }
+        )
+    }
+
+    handleActivatedPageChanged = (newActivatedPage) => {
+        this.setState({
+            activatedPage: newActivatedPage
+        });
+
+        axios.get(`http://localhost:5000/categories/${this.state.selectedCategory.id}/products?page=${newActivatedPage}&productsPerPage=
+        ${this.state.productsPerPage}`).then(
+            response => {
+                this.setState({
+                    proizvodi: response.data,
+                })
+            },
+            error => {
+                window.alert("Error while loading products: " + error);
+            }
+        );
     }
 
     render() {
+
+        console.log(this.state);
+
         return <div>
             <div className="grid grid-cols-5 grid-flow-row p-2 space-x-8 static">
                 <Kategorije kategorije={this.state.kategorije} onCategoryChange={this.handleCategoryChange}/>
@@ -75,6 +109,15 @@ class Pocetna extends React.Component {
                             <video width="95%" className="rounded-lg m-5 p-5" playsInline autoPlay="autoplay" loop
                                    muted>
                                 <source src="http://localhost:5000/img/zs.mp4" type="video/mp4"/>
+                                <source src="mov_bbb.ogg" type="video/ogg"/>
+                                Your browser does not support HTML video.
+                            </video> : ''
+                    }
+                    {
+                        this.state.selectedCategory.id === 12 && this.state.search === '' ?
+                            <video width="95%" className="rounded-lg m-5 p-5" playsInline autoPlay="autoplay" loop
+                                   muted>
+                                <source src="http://localhost:5000/img/zs1.mp4" type="video/mp4"/>
                                 <source src="mov_bbb.ogg" type="video/ogg"/>
                                 Your browser does not support HTML video.
                             </video> : ''
@@ -101,9 +144,13 @@ class Pocetna extends React.Component {
                 </div>
             </div>
             {
-                this.state.proizvodi.length !== 0 ? <Pagination/> : ''
+                this.state.proizvodi.length !== 0 ? <Pagination
+                    activatedPage={this.state.activatedPage}
+                    productsPerPage={this.state.productsPerPage}
+                    numberOfProducts={this.state.numberOfProducts}
+                    handleActivatedPageChanged={this.handleActivatedPageChanged}
+                /> : ''
             }
-
         </div>
     }
 }

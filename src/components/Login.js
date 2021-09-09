@@ -32,9 +32,10 @@ class Login extends React.Component {
             response => {
                 localStorage.setItem('userId', response.data.id);
                 localStorage.setItem('userMoney', response.data.balance);
+                localStorage.setItem('isAdmin', response.data.is_admin);
             },
             err => {
-                window.alert('Error ' , err );
+                window.alert('Error while retrieving user : ' , err);
             }
         )
     }
@@ -52,8 +53,9 @@ class Login extends React.Component {
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('email', this.state.email);
                 this.props.history.push('/', {loggedIn: true});
-                this.props.handleLogin(true);
                 this.addUserIdToStorage();
+                this.props.handleLogin(true);
+
             },
             err => {
                 window.alert('Error ', err);
@@ -77,7 +79,7 @@ class Login extends React.Component {
                            onChange={this.emailChanged}/>
                 </div>
                 <div className="pd-5">
-                    <label htmlFor="password">Sifra</label>
+                    <label htmlFor="password">Šifra</label>
                     <br/>
                     <input type="password" id="password"
                            className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
