@@ -14,6 +14,7 @@ class Pocetna extends React.Component {
         this.state.numberOfProducts = 0;
         this.state.productsPerPage = 6;
         this.state.activatedPage = 1;
+        this.state.searching = false;
     }
 
     componentDidMount() {
@@ -96,7 +97,8 @@ class Pocetna extends React.Component {
 
         console.log(this.state);
 
-        return <div>
+        return <div style={{minHeight: "82vh"}}>
+
             <div className="grid grid-cols-5 grid-flow-row p-2 space-x-8 static">
                 <Kategorije kategorije={this.state.kategorije} onCategoryChange={this.handleCategoryChange}/>
                 <div className="col-span-4">
@@ -105,7 +107,7 @@ class Pocetna extends React.Component {
                         'Rezultati pretrage' : this.state.selectedCategory.name}</h1>
 
                     {
-                        this.state.selectedCategory.id === 1 && this.state.search === '' ?
+                        this.state.selectedCategory.id === 1 && this.state.search === '' && this.state.activatedPage === 1 ?
                             <video width="95%" className="rounded-lg m-5 p-5" playsInline autoPlay="autoplay" loop
                                    muted>
                                 <source src="http://localhost:5000/img/zs.mp4" type="video/mp4"/>
@@ -114,7 +116,7 @@ class Pocetna extends React.Component {
                             </video> : ''
                     }
                     {
-                        this.state.selectedCategory.id === 12 && this.state.search === '' ?
+                        this.state.selectedCategory.id === 12 && this.state.search === '' && this.state.activatedPage === 1 ?
                             <video width="95%" className="rounded-lg m-5 p-5" playsInline autoPlay="autoplay" loop
                                    muted>
                                 <source src="http://localhost:5000/img/zs1.mp4" type="video/mp4"/>
@@ -122,7 +124,22 @@ class Pocetna extends React.Component {
                                 Your browser does not support HTML video.
                             </video> : ''
                     }
-                    <div className="grid grid-flow-row sm:grid-cols-1 md:grid-cols-3 2xl:grid-cols-4  gap-12 p-5 m-5 ">
+                    {
+                        this.state.searching === true ?
+                            <div className="flex justify-around items-around">
+                                <div className="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div> : ''
+                    }
+                    <div className="grid grid-flow-row sm:grid-cols-1 md:grid-cols-3 3xl:grid-cols-4  gap-12 p-5 m-5 ">
                         {
                             this.state.proizvodi.map((product) => <Proizvod
                                 key={product.id}
@@ -135,12 +152,10 @@ class Pocetna extends React.Component {
                             />)
 
                         }
-
                     </div>
                     {this.state.proizvodi.length === 0 ?
                         <h1 className="text-center text-xl"> Nijedan proizvod nije pronađen</h1> : ''
                     }
-
                 </div>
             </div>
             {

@@ -52,14 +52,15 @@ class Proizvod extends React.Component {
 
     render() {
         return <div
-            className="col rounded-xl bg-white border-gray-200 shadow-md overflow-hidden w-72 hover:shadow-2xl cursor-pointer bg-gray-300">
+            className="col rounded-xl bg-white  shadow-md overflow-hidden w-72 hover:shadow-2xl
+            cursor-pointer bg-gray-300 border-2 border-white">
             <Link to='/#' onClick={this.redirectToProductDetails.bind(
                 this, this.props.id, this.props.naziv, this.props.cijena, this.props.putanja,  this.props.kategorija.name)}>
                 <img src={this.props.putanja}
                      alt="Zemlja Snova"
                      className="w-72 h-80 object-cover"/>
                 <div className="m-4">
-                    <span className="font-bold">Naziv proizvoda: {this.props.naziv}</span>
+                    <span className="font-bold">{this.props.naziv}</span>
                     <span className="block text-gray-500 text-sm">Cijena : {this.props.cijena} €</span>
                 </div>
             </Link>

@@ -67,7 +67,7 @@ class Navbar extends React.Component {
         return <div>
             <nav
                 className="flex justify-around bg-gray-200 items-center space-y-1 border-b-2 b border-red-400
-                rounded-sm shadow-lg">
+                rounded-sm shadow-xl">
                 <div className="flex justify-center items-center pl-2">
                     <div className="font-semibold text-2xl text-red-600"><Link to='/'>Zemlja Snova</Link></div>
                 </div>

@@ -30,12 +30,15 @@ class Login extends React.Component {
         let email = localStorage.getItem('email');
         axios.get(`http://localhost:5000/users/email/${email}`).then(
             response => {
+                console.log("Response " + response.data.is_admin);
                 localStorage.setItem('userId', response.data.id);
                 localStorage.setItem('userMoney', response.data.balance);
                 localStorage.setItem('isAdmin', response.data.is_admin);
+                this.props.handleLogin(true);
+                this.props.history.push('/', {loggedIn: true});
             },
             err => {
-                window.alert('Error while retrieving user : ' , err);
+                window.alert('Error while retrieving user : ', err);
             }
         )
     }
@@ -52,9 +55,7 @@ class Login extends React.Component {
             response => {
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('email', this.state.email);
-                this.props.history.push('/', {loggedIn: true});
                 this.addUserIdToStorage();
-                this.props.handleLogin(true);
 
             },
             err => {
@@ -64,42 +65,44 @@ class Login extends React.Component {
     }
 
 
-
     render() {
-        return <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">
-            <form action="" className="flex m-5 p-5 flex-col bg-gray-100 border-2 rounded-md border-red-400 shadow-lg">
-                <h1 className="text-center text-2xl">Prijavi se</h1>
-                <hr className="border mt-2"/>
-                <div className="pt-2">
-                    <label htmlFor="email">Email </label>
-                    <br/>
-                    <input type="email" id="email"
-                           className="rounded-md px-5 rounded border-2 border-red-400 w-64"
-                           value={this.state.email}
-                           onChange={this.emailChanged}/>
-                </div>
-                <div className="pd-5">
-                    <label htmlFor="password">Šifra</label>
-                    <br/>
-                    <input type="password" id="password"
-                           className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
-                           value={this.state.password}
-                           onChange={this.passwordChanged}/>
-                </div>
-
-                <button
-                    className="mt-5 border-2 text-center border-red-400  p-1 rounded-md  font-semibold
-                        text-red-600 hover:bg-red-400 hover:text-white flex items-center justify-center"
-                    onClick={this.onButtonClick}>
-                    Prijavi se
-                </button>
-                <hr className="border mt-5 mb-3"/>
-                <div className="flex flex-row">
-                    <div>
-                        <Link to='/register' className="text-sm text-blue-600">Registruj se </Link>
+        return <div style={{minHeight: "80vh"}}>
+            <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">
+                <form action=""
+                      className="flex m-5 p-5 flex-col bg-gray-100 border-2 rounded-md border-red-400 shadow-lg">
+                    <h1 className="text-center text-2xl">Prijavi se</h1>
+                    <hr className="border mt-2"/>
+                    <div className="pt-2">
+                        <label htmlFor="email">Email </label>
+                        <br/>
+                        <input type="email" id="email"
+                               className="rounded-md px-5 rounded border-2 border-red-400 w-64"
+                               value={this.state.email}
+                               onChange={this.emailChanged}/>
                     </div>
-                </div>
-            </form>
+                    <div className="pd-5">
+                        <label htmlFor="password">Šifra</label>
+                        <br/>
+                        <input type="password" id="password"
+                               className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
+                               value={this.state.password}
+                               onChange={this.passwordChanged}/>
+                    </div>
+
+                    <button
+                        className="mt-5 border-2 text-center border-red-400  p-1 rounded-md  font-semibold
+                        text-red-600 hover:bg-red-400 hover:text-white flex items-center justify-center"
+                        onClick={this.onButtonClick}>
+                        Prijavi se
+                    </button>
+                    <hr className="border mt-5 mb-3"/>
+                    <div className="flex flex-row">
+                        <div>
+                            <Link to='/register' className="text-sm text-blue-600">Registruj se </Link>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     }
 

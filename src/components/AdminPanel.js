@@ -55,14 +55,12 @@ class AdminPanel extends React.Component {
 
     onButtonClick = (event) => {
         event.preventDefault();
-        console.log("Dugme je kliknuto ")
         let data = new FormData();
         data.append("name", this.state.image.name);
         data.append("file", this.state.image);
         axios.post('http://localhost:5000/addPicture', data).then(
             response => {
-                window.alert("Slika uspjesno dodata");
-
+               console.log("Slika je uspjesno dodata " + response.data);
             },
             error => {
                 window.alert("Error " + error);
@@ -126,7 +124,7 @@ class AdminPanel extends React.Component {
                                onChange={this.handleProductNameChanged}
                         />
                     </div>
-                    <div className="pd-5">
+                    <div >
                         <label htmlFor="image" className="my-5 py-5 w-auto">Slika</label>
                         <br/>
                         <input type="file" id="image" name="file"
@@ -137,7 +135,7 @@ class AdminPanel extends React.Component {
 
                     <label htmlFor="categories" className="p-1 m-2">Kategorija </label>
                     <br/>
-                    <select name="category" id="categories" className="w-full m-2"
+                    <select name="category" id="categories" className="w-full m-2 border-2 border-red-400 rounded-md"
                             placeholder="Izaberi kategoriju "
                             value={this.state.selectedCategoryId} onChange={this.handleCategoryChange}>
                         {this.state.kategorije.map(

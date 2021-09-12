@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2021 at 09:11 PM
+-- Generation Time: Sep 12, 2021 at 09:42 PM
 -- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,7 +38,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `product_id`, `user_id`) VALUES
-(59, 4, 22);
+(69, 12, 7),
+(73, 18, 26);
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,26 @@ INSERT INTO `product` (`id`, `name`, `price`, `path`, `category_id`) VALUES
 (19, 'Rukavice sa suncokretima', '25.00', '/img/rukavice1.png', 9),
 (20, 'Braon Zimske Rukavice', '26.00', '/img/brRukavice.png', 9),
 (21, 'Roze Zimski Kaput', '60.00', '/img/rozeKaput.png', 12),
-(22, 'Torba', '60.00', '/img/torba.png', 5);
+(22, 'Torba', '60.00', '/img/torba.png', 5),
+(23, 'Crveno Crne Zimske Rukavice', '20.00', '/img/crveneRukavice.png', 9),
+(24, 'Plava Haljina', '60.00', '/img/PlavaHaljina.png', 1),
+(25, 'Plava Kosulja', '45.00', '/img/plavaKosulja.png', 1),
+(26, 'Plava Kratka Haljina', '40.00', '/img/plavaHaljina2.png', 1),
+(27, 'Zimski Kafeni Kaput', '80.00', '/img/kaputZimskiKafeni.jpg', 12),
+(28, 'Bijeli Zimski Kaput', '80.00', '/img/BIjeliZimskiKaput.png', 12),
+(29, 'Crveni Dzemper', '40.00', '/img/CrveniDzemper.jpg', 12),
+(30, 'Crno-Bijeli Kaput', '25.99', '/img/CrnoBijeliKaput.jpg', 12),
+(31, 'Braon Kaput', '45.99', '/img/BraonKaput.png', 12),
+(32, 'Ljubicasti Sal', '14.99', '/img/Ljubicasti sal.png', 6),
+(33, 'Plavi Sal', '14.99', '/img/PlaviSal.png', 6),
+(34, 'Roze Sal Pruge', '13.99', '/img/RozeSalPruge.png', 6),
+(35, 'Sky Blue Sal', '19.99', '/img/SkyBlueSal.png', 6),
+(36, 'Zuti Pamucni Sal', '20.55', '/img/ZutiPamucniSal.png', 6),
+(37, 'Zute Kozne Rukavice', '20.00', '/img/ZuteKozne.png', 9),
+(38, 'Zimske Crno Bijele Rukavice', '20.00', '/img/ZimskeCrnoBele.png', 9),
+(39, 'Zimske Klasicne Rukavice', '11.00', '/img/ZimskeKlasicne.png', 9),
+(40, 'Zimska Kozna Jakna', '59.99', '/img/Zimska Kozna Jakna.jpg', 12),
+(41, 'Braon Kozna Torba', '18.99', '/img/BraonKoznaTorba.png', 5);
 
 -- --------------------------------------------------------
 
@@ -139,8 +159,9 @@ INSERT INTO `users` (`id`, `name`, `lastname`, `email`, `balance`, `is_admin`) V
 (21, 'Marko', 'Lekic', 'marko.lekic@fleka.me', '20852.00', 0),
 (22, 'Lucija', 'Jovanovic', 'lucija.jovanovic@gmail.com', '20000.00', 0),
 (23, 'Aleksandar', 'Popovic', 'aleksandar.popovic@ucg.edu.me', '20000.00', 0),
-(24, 'Rade', 'Veljic', 'rade.veljic@fleka.me', '99999.99', 1),
-(25, 'Slavko', 'Kovacevic', 'slavko.kovacevic@fleka.me', '30000.00', 0);
+(24, 'Rade', 'Veljic', 'rade.veljic@fleka.me', '99764.99', 1),
+(25, 'Slavko', 'Kovacevic', 'slavko.kovacevic@fleka.me', '30000.00', 0),
+(26, 'Vojislav', 'Djilas', 'vojislav.djilas@gmail.com', '22000.00', 0);
 
 --
 -- Indexes for dumped tables
@@ -181,7 +202,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -193,13 +214,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

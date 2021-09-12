@@ -10,7 +10,7 @@ import Korpa from "./components/Korpa";
 import React from "react";
 import axios from "axios";
 import AdminPanel from "./components/AdminPanel";
-import FirebaseTest from "./components/FirebaseTest";
+
 
 
 class App extends React.Component {
@@ -31,7 +31,7 @@ class App extends React.Component {
         this.setState({
             loggedIn: data,
             isAdmin: localStorage.getItem('isAdmin') == 1 ? true : false
-        })
+        });
     }
 
     cartChanged = () => {
@@ -64,7 +64,6 @@ class App extends React.Component {
                     <Route path='/productDetails/:id' component={ProizvodDetalji}/>
                     <Route path='/cart' component={() => <Korpa amountChanged={this.cartChanged}/>}/>
                     <Route path='/admin' component={() => <AdminPanel/>}/>
-                    {/*<Route path='/test' component={FirebaseTest}/>*/}
                 </Switch>
                 <Footer/>
             </Router>

@@ -87,10 +87,11 @@ class Korpa extends React.Component {
     }
 
     render() {
-        return <div className="text-center text-xl mx-5 p-5">
+        return <div className="text-center text-xl mx-5 p-5 " style={{minHeight : "80vh"}}>
             <h1 className="text-red-600 text-3xl"> Vaša Korpa</h1>
             {
                 this.state.proizvodi.map((proizvod) => <KorpaProizvod
+                    key={proizvod.product_id}
                     nazivProizvoda={proizvod.name}
                     cijenaProizvoda={proizvod.price}
                     putanja={proizvod.path}
