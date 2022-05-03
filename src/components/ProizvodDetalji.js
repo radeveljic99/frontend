@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const qs = require('querystring');
@@ -9,24 +9,21 @@ class ProizvodDetalji extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.location.state;
-        console.log(this.state);
     }
 
     componentDidMount() {
         axios.get(`http://localhost:5000/productCategory/${this.state.id}`).then(
             response => {
-                // window.alert(response.data.name);
                 this.setState({
                     kategorija: response.data.name
                 });
             }, error => {
-                console.log(error);
+                window.alert("Error while fetching data");
             }
         );
     }
 
     addToCart(id, naziv, cijena, putanja, event) {
-        console.log(id);
         event.preventDefault();
         if (!!localStorage.getItem('token')) {
             console.log(id);
@@ -35,7 +32,7 @@ class ProizvodDetalji extends React.Component {
                 userId: localStorage.getItem('userId')
             })).then(
                 response => {
-                    this.props.history.push({pathname: '/cart'});
+                    this.props.history.push({ pathname: '/cart' });
                 },
                 error => {
                     window.alert(error);
@@ -47,15 +44,13 @@ class ProizvodDetalji extends React.Component {
     }
 
     render() {
-        // this.state = this.props.location.state
-        console.log(this.state);
-        return <div style={{minHeight: "82vh"}}>
+        return <div style={{ minHeight: "82vh" }}>
             <h1 className="text-3xl text-red-600 text-center m-1 p-3"> Detalji o proizvodu </h1>
             <div className="flex justify-around items-baseline m-3 pb-2 ">
                 <div className="grid grid-cols-2 grid-flow-row rounded-xl shadow-2xl bg-gray-300 border-2 border-white"
-                     style={{width: '65%', height: '80%'}}>
+                    style={{ width: '65%', height: '80%' }}>
                     <div className="p-3"><img src={this.state.putanja} alt="Zemlja Snova"
-                                              className="rounded-xl  mt-5 w-80 h-96 object-cover"
+                        className="rounded-xl mt-5 w-80 h-96 object-cover"
                     /></div>
                     <div className="text-center">
                         <div className="m-5 p-5"><h1
@@ -64,12 +59,12 @@ class ProizvodDetalji extends React.Component {
                                 <div className="px-5 m-5 text-xl text-bold"><p>Cijena </p></div>
                                 <div className="px-5 m-5 text-xl"><p> € {this.state.cijena}</p></div>
                             </div>
-                            <hr/>
+                            <hr />
                             <div className="flex justify-around items-center">
-                                <div className="px-5 m-5 text-xl text-bold"><p>Kategorija </p></div>
+                                <div className="px-5 m-5 text-xl text-bold"><p>Kategorija</p></div>
                                 <div className="px-5 m-5 text-xl"><p> {this.state.kategorija}</p></div>
                             </div>
-                            <hr/>
+                            <hr />
                         </div>
 
                         <div className="flex justify-around items-end pt-5">

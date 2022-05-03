@@ -1,7 +1,7 @@
 import React from "react";
 import KorpaProizvod from "./KorpaProizvod";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Korpa extends React.Component {
 
@@ -21,16 +21,13 @@ class Korpa extends React.Component {
         axios.get(`http://localhost:5000/cartProducts/${this.state.userId}}`).then(
             response => {
                 let noviProizvodi = response.data;
-                console.log(noviProizvodi);
                 for (let i = 0; i < noviProizvodi.length; i++) {
                     noviProizvodi[i].path = `http://localhost:5000${noviProizvodi[i].path}`;
-                    noviProizvodi[i] = {...noviProizvodi[i], kolicina: 1};
+                    noviProizvodi[i] = { ...noviProizvodi[i], kolicina: 1 };
                 }
                 this.setState({
                     proizvodi: noviProizvodi
                 })
-
-                console.log(this.state);
                 localStorage.setItem('brojElemenataUKorpi', response.data.length);
             },
             err => {
@@ -40,21 +37,17 @@ class Korpa extends React.Component {
     }
 
     handleTotalPriceChange = (productId, novaKolicina) => {
-        console.log("productId = " + productId + " kolicina = " + novaKolicina);
         let noviProizvodi = this.state.proizvodi;
         for (let i = 0; i < noviProizvodi.length; i++) {
             let proizvod = noviProizvodi[i];
-            console.log(proizvod);
             if (proizvod.id == productId) {
                 proizvod.kolicina = novaKolicina;
-                console.log('true');
                 this.setState({
                     proizvodi: noviProizvodi
                 });
                 break;
             }
         }
-        console.log(this.state);
     }
 
     makeOrder = event => {
@@ -87,7 +80,7 @@ class Korpa extends React.Component {
     }
 
     render() {
-        return <div className="text-center text-xl mx-5 p-5 " style={{minHeight : "80vh"}}>
+        return <div className="text-center text-xl mx-5 p-5 " style={{ minHeight: "80vh" }}>
             <h1 className="text-red-600 text-3xl"> Vaša Korpa</h1>
             {
                 this.state.proizvodi.map((proizvod) => <KorpaProizvod

@@ -1,7 +1,7 @@
 import React from "react";
-import {Redirect, withRouter} from 'react-router-dom';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import {useHistory} from "react-router-dom";
+import { Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const qs = require('querystring');
@@ -25,7 +25,7 @@ class Proizvod extends React.Component {
                     'naziv': naziv,
                     'cijena': cijena,
                     'putanja': putanja,
-                    'kategorija':kategorija
+                    'kategorija': kategorija
                 }
             });
     }
@@ -34,12 +34,12 @@ class Proizvod extends React.Component {
         event.preventDefault();
         if (!!localStorage.getItem('token')) {
             axios.post('http://localhost:5000/cartProducts', qs.stringify({
-                productId : id,
-                userId : localStorage.getItem('userId')
+                productId: id,
+                userId: localStorage.getItem('userId')
             })).then(
                 response => {
                     localStorage.setItem('brojElemenataUKorpi', +localStorage.getItem('brojElementaUKorpi') + 1);
-                    this.props.history.push({pathname: '/cart'});
+                    this.props.history.push({ pathname: '/cart' });
                 },
                 error => {
                     window.alert(error);
@@ -55,10 +55,10 @@ class Proizvod extends React.Component {
             className="col rounded-xl bg-white  shadow-md overflow-hidden w-72 hover:shadow-2xl
             cursor-pointer bg-gray-300 border-2 border-white">
             <Link to='/#' onClick={this.redirectToProductDetails.bind(
-                this, this.props.id, this.props.naziv, this.props.cijena, this.props.putanja,  this.props.kategorija.name)}>
+                this, this.props.id, this.props.naziv, this.props.cijena, this.props.putanja, this.props.kategorija.name)}>
                 <img src={this.props.putanja}
-                     alt="Zemlja Snova"
-                     className="w-72 h-80 object-cover"/>
+                    alt="Zemlja Snova"
+                    className="w-72 h-80 object-cover" />
                 <div className="m-4">
                     <span className="font-bold">{this.props.naziv}</span>
                     <span className="block text-gray-500 text-sm">Cijena : {this.props.cijena} €</span>

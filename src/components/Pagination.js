@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Pagination extends React.Component {
 
@@ -21,17 +21,6 @@ class Pagination extends React.Component {
 
     }
 
-    // pages() {
-    //     result = [];
-    //     for (let i = this.state.numberOfProducts; i > 0; i--) {
-    //         let classname = '';
-    //         if (this.state.activePageId === i) {
-    //             classname = "active";
-    //         }
-    //         result.push(<Link to="/#" className={classname}>i</Link>)
-    //     }
-    //     return result;
-    // }
 
     handlePageChange = (i, event) => {
         event.preventDefault();
@@ -58,7 +47,7 @@ class Pagination extends React.Component {
                     this.state.numberOfPages !== 1 ?
                         this.state.productPageId.map(i =>
                             <Link to="/#" onClick={this.handlePageChange.bind(this, i)}
-                                  className={i == this.state.activePageId ? "active" : ''}>
+                                className={i == this.state.activePageId ? "active" : ''}>
                                 {i}
                             </Link>
                         )

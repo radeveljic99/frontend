@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, Route, Link, withRouter} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 
 
 class Navbar extends React.Component {
@@ -17,7 +17,6 @@ class Navbar extends React.Component {
         }
         this.state.search = '';
         this.state.isAdmin = this.props.isAdmin;
-        console.log(this.state);
     }
 
     logout = (event) => {
@@ -32,11 +31,6 @@ class Navbar extends React.Component {
         })
         this.props.loggedInChange(false);
     }
-
-    // onSearch = event => {
-    //     event.preventDefault();
-    //     this.props.searchChanged(this.state.search);
-    // }
 
     searchChanged = event => {
         event.preventDefault();
@@ -56,13 +50,9 @@ class Navbar extends React.Component {
         this.state.itemsNumber = localStorage.getItem('brojElemenataUKorpi');
 
         if (!!localStorage.getItem('email')) {
-            console.log(localStorage.getItem('email'));
             this.state.email = localStorage.getItem('email');
         }
         this.state.username = this.state.email.substring(0, this.state.email.indexOf('@'));
-        // this.state.isAdmin = i;
-        console.log(isAdmin);
-        console.log(localStorage.getItem('isAdmin'));
 
         return <div>
             <nav
@@ -73,33 +63,21 @@ class Navbar extends React.Component {
                 </div>
                 <div className="flex justify-center items-center space-x-1">
                     <input type="text" placeholder="Pretraži proizvode"
-                           className="border-2 border-red-400 rounded-md px-2 py-1 w-full"
-                           value={this.state.search}
-                           onChange={this.searchChanged}/>
-                    {/*<button*/}
-                    {/*    className="border-2 border-red-400  p-1 rounded-2xl text-red-600 font-semibold*/}
-                    {/*    hover:bg-red-400 hover:text-white flex items-center justify-center "*/}
-                    {/*    onClick={this.onSearch}>*/}
-                    {/*    <svg className="h-6 w-6 red-400 " xmlns="http://www.w3.org/2000/svg" fill="none"*/}
-                    {/*         viewBox="0 0 24 24"*/}
-                    {/*         stroke="currentColor">*/}
-                    {/*        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"*/}
-                    {/*              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>*/}
-                    {/*    </svg>*/}
-                    {/*</button>*/}
+                        className="border-2 border-red-400 rounded-md px-2 py-1 w-full"
+                        value={this.state.search}
+                        onChange={this.searchChanged} />
                 </div>
                 <div className="flex justify-center space-x-2">
                     {
                         loggedIn === true ? <div className=" flex justify-center items-center py-2 px-3">
                             <Link to='/cart'>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24"
-                                     stroke="currentColor">
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707
                                       1.707H17m00a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
-
                             </Link>
                         </div> : ''
                     }

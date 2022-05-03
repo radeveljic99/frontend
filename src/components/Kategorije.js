@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 
@@ -10,13 +10,12 @@ class Kategorije extends React.Component {
         this.state = {
             kategorije: this.props.kategorije
         };
-        console.log(this.state.kategorije);
     }
 
     componentDidMount() {
         axios.get("http://localhost:5000/categories").then(
             response => {
-                this.setState({kategorije: response.data});
+                this.setState({ kategorije: response.data });
             },
             error => {
                 window.alert('Error while loading categories : ' + error);
@@ -42,11 +41,11 @@ class Kategorije extends React.Component {
                 <ul className="space-x-5 ml-5 space-y-1 text-lg ">
                     {
                         this.state.kategorije.map((kategorija) => <li key={kategorija.id}
-                                                                      className="ml-5 px-5 py-1 rounded-lg hover:bg-red-400
+                            className="ml-5 px-5 py-1 rounded-lg hover:bg-red-400
                                                                       hover:cursor-pointer"
                         >
                             <Link to='/'
-                                  onClick={this.categoryClicked.bind(this, kategorija.name, kategorija.id)}>
+                                onClick={this.categoryClicked.bind(this, kategorija.name, kategorija.id)}>
                                 {kategorija.name}
                             </Link>
                         </li>)
