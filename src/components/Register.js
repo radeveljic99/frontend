@@ -83,13 +83,14 @@ class Register extends React.Component {
                     this.props.handleRegister(true);
                 }
             ).catch(err => {
+                console.log(err);
                 window.alert('error');
             });
     }
 
     render() {
-        return <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">
-            <form className="flex m-5 p-5 flex-col border-2 rounded-md border-red-400 bg-gray-100 shadow-lg">
+        return <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl text-white">
+            <form className="flex m-5 p-5 flex-col border-2 rounded-md border-primary bg-base-200 shadow-lg">
                 <h1 className="text-center text-2xl">Registruj se</h1>
                 <hr className="border mt-2" />
                 <div className="pt-5">
@@ -98,7 +99,7 @@ class Register extends React.Component {
                         <label htmlFor="name">Ime</label>
                         <br />
                         <input type="text" id="name"
-                            className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
+                            className="pd-5 rounded-md px-5 text-black border-2 border-primary w-64"
                             value={this.state.name} onChange={this.nameChanged}
                         />
                     </div>
@@ -106,7 +107,7 @@ class Register extends React.Component {
                         <label htmlFor="lastname">Prezime</label>
                         <br />
                         <input type="text" id="lastname"
-                            className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
+                            className="pd-5 rounded-md px-5 text-black border-2 border-primary w-64"
                             value={this.state.lastname} onChange={this.lastnameChanged}
                         />
                     </div>
@@ -114,14 +115,14 @@ class Register extends React.Component {
                     <label htmlFor="email">Email </label>
                     <br />
                     <input type="email" id="email"
-                        className="rounded-md px-5 rounded border-2 border-red-400 w-64"
+                        className="rounded-md px-5 rounded text-black border-2 border-primary w-64"
                         value={this.state.email} onChange={this.emailChanged} />
                 </div>
                 <div className="pd-5">
                     <label htmlFor="password">Lozinka</label>
                     <br />
                     <input type="password" id="password"
-                        className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
+                        className="pd-5 rounded-md text-black px-5 border-2 border-primary w-64"
                         value={this.state.password} onChange={this.passwordChanged} />
                 </div>
 
@@ -129,20 +130,20 @@ class Register extends React.Component {
                     <label htmlFor="balance">Kolicina novca</label>
                     <br />
                     <input type="number" id="balance"
-                        className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
+                        className="pd-5 rounded-md px-5 border-2 text-black border-primary w-64"
                         value={this.state.balance} onChange={this.balanceChanged}
                     />
                 </div>
                 <button
-                    className="mt-5 border-2 text-center border-red-400  rounded-md  font-semibold  text-red-600
-                             hover:bg-red-400 hover:text-white flex items-center justify-center"
+                    className="mt-5 border-2 text-center border-primary  rounded-md  font-semibold
+                           bg-primary text-white flex items-center justify-center hover:bg-neutral"
                     onClick={this.onButtonClick}>
                     Registruj se
                 </button>
                 <hr className="border mt-5 mb-3 " />
                 <div className="flex flex-row">
                     <div>
-                        <Link to='/login' className="text-sm text-blue-600">Prijavi se</Link>
+                        <Link to='/login' className="text-sm text-white">Prijavi se</Link>
                     </div>
                 </div>
             </form>

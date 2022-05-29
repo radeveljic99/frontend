@@ -67,16 +67,16 @@ class Login extends React.Component {
 
     render() {
         return <div style={{ minHeight: "80vh" }}>
-            <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl ">
+            <div className="h-full flex justify-center gap-5 m-5 p-5 text-xl text-white">
                 <form action=""
-                    className="flex m-5 p-5 flex-col bg-gray-100 border-2 rounded-md border-red-400 shadow-lg">
-                    <h1 className="text-center text-2xl">Prijavi se</h1>
+                    className="flex m-5 p-5 flex-col bg-base-200 rounded-md shadow-lg border border-primary">
+                    <h1 className="text-center text-white text-2xl">Prijavi se</h1>
                     <hr className="border mt-2" />
                     <div className="pt-2">
                         <label htmlFor="email">Email </label>
                         <br />
                         <input type="email" id="email"
-                            className="rounded-md px-5 rounded border-2 border-red-400 w-64"
+                            className="rounded-md px-5 rounded border-2 border-primary w-64"
                             value={this.state.email}
                             onChange={this.emailChanged} />
                     </div>
@@ -84,21 +84,21 @@ class Login extends React.Component {
                         <label htmlFor="password">Šifra</label>
                         <br />
                         <input type="password" id="password"
-                            className="pd-5 rounded-md px-5 border-2 border-red-400 w-64"
+                            className="pd-5 rounded-md px-5 text-black border-2 border-primary w-64"
                             value={this.state.password}
                             onChange={this.passwordChanged} />
                     </div>
 
                     <button
-                        className="mt-5 border-2 text-center border-red-400  p-1 rounded-md  font-semibold
-                        text-red-600 hover:bg-red-400 hover:text-white flex items-center justify-center"
+                        className="mt-5 border-2 text-center border-primary  p-1 rounded-md  font-semibold
+                        bg-primary hover:text-white flex items-center hover:bg-neutral justify-center"
                         onClick={this.onButtonClick}>
                         Prijavi se
                     </button>
                     <hr className="border mt-5 mb-3" />
                     <div className="flex flex-row">
                         <div>
-                            <Link to='/register' className="text-sm text-blue-600">Registruj se </Link>
+                            <Link to='/register' className="text-sm">Registruj se </Link>
                         </div>
                     </div>
                 </form>

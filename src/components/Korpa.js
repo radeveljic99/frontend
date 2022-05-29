@@ -1,7 +1,7 @@
 import React from "react";
 import KorpaProizvod from "./KorpaProizvod";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 class Korpa extends React.Component {
 
@@ -23,7 +23,7 @@ class Korpa extends React.Component {
                 let noviProizvodi = response.data;
                 for (let i = 0; i < noviProizvodi.length; i++) {
                     noviProizvodi[i].path = `http://localhost:5000${noviProizvodi[i].path}`;
-                    noviProizvodi[i] = { ...noviProizvodi[i], kolicina: 1 };
+                    noviProizvodi[i] = {...noviProizvodi[i], kolicina: 1};
                 }
                 this.setState({
                     proizvodi: noviProizvodi
@@ -80,8 +80,8 @@ class Korpa extends React.Component {
     }
 
     render() {
-        return <div className="text-center text-xl mx-5 p-5 " style={{ minHeight: "80vh" }}>
-            <h1 className="text-red-600 text-3xl"> Vaša Korpa</h1>
+        return <div className="text-center text-xl mx-5 p-5 " style={{minHeight: "80vh"}}>
+            <h1 className="text-white text-3xl"> Vaša Korpa</h1>
             {
                 this.state.proizvodi.map((proizvod) => <KorpaProizvod
                     key={proizvod.product_id}
@@ -95,15 +95,14 @@ class Korpa extends React.Component {
             }
             {
                 this.state.proizvodi.length == 0 ?
-                    <h2 className=" text-xl p-5 m-5"> Vaša Korpa je Trenutno prazna</h2> : ''
+                    <h2 className=" text-xl p-5 m-5 text-white"> Vaša Korpa je Trenutno prazna</h2> : ''
             }
             {
-                this.state.proizvodi.length > 0 ? <div className="flex justify-around items-center ">
+                this.state.proizvodi.length > 0 ? <div className="flex justify-around items-center">
                     <div
-                        className="flex justify-around items-center text-center p-2 border-2 rounded-lg w-96 border-gray-300 shadow-lg">
-                        <div className="text-center w-36 border-2 border-red-400  rounded-2xl text-red-600 font-semibold  hover:bg-red-400
-                   hover:text-white">
-
+                        className="flex justify-around items-center text-center p-2 rounded-lg w-96">
+                        <div className="text-center w-36 rounded-2xl text-primary font-semibold bg-white py-2 hover:bg-gray-200
+                   hover:text-blue-700">
                             <Link to='/#' onClick={this.makeOrder}>NARUČI</Link>
                         </div>
                     </div>

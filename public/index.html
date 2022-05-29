@@ -15,19 +15,20 @@
         }
 
         .pagination a {
-            color: black;
+            color: white;
             float: left;
             padding: 8px 16px;
             text-decoration: none;
         }
 
         .pagination a.active {
-            background-color: rgb(222, 59, 106);
-            color: white;
+            background-color: white;
+            color: black;
             border-radius: 5px;
         }
 
         .pagination a:hover:not(.active) {
+			color: black;
             background-color: #ddd;
             border-radius: 5px;
         }
@@ -48,15 +49,8 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: #fff;
+            background: black;
             margin: -4px 0 0 -4px;
-        }
-        .lds-roller div:nth-child(1) {
-            animation-delay: -0.036s;
-        }
-        .lds-roller div:nth-child(1):after {
-            top: 63px;
-            left: 63px;
         }
         .lds-roller div:nth-child(2) {
             animation-delay: -0.072s;
@@ -118,6 +112,8 @@
 
     </style>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@2.15.1/dist/full.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.tailwindcss.com"></script>
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -134,7 +130,7 @@
     -->
     <title>Zemlja Snova</title>
 </head>
-<body class="text-gray-700 font-serif bg-gradient-to-r from-gray-300 to-gray-50">
+<body class="text-gray-700 font-latin bg-base-200 overflow-x-hidden">
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
 <!--
