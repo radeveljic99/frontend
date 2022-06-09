@@ -50,7 +50,7 @@ class Login extends React.Component {
             password: this.state.password,
             returnSecureToken: true
         };
-        axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC9jSuPN8I1_T7UsVEqB1ZcvrR4wV_u8N4",
+        axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCaU7_UX5wBzxoMe86LmDGNtEAODqL3XPw",
             qs.stringify(data)).then(
                 response => {
                     localStorage.setItem('token', response.data.idToken);
